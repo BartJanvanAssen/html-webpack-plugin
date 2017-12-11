@@ -332,7 +332,12 @@ HtmlWebpackPlugin.prototype.addFileToAssets = function (filename, compilation) {
   })
   .then(function (results) {
     var basename = path.basename(filename);
-    compilation.fileDependencies.push(filename);
+    if (compilation.fileDependencies.push) {
+      compilation.fileDependencies.push(filename);
+    } else {
+      // Webpack 4 - fileDepenencies is now a Set
+      compilation.fileDependencies.add(filename);
+    }
     compilation.assets[basename] = {
       source: function () {
         return results.source;
