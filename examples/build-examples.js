@@ -37,6 +37,7 @@ examples.forEach(function (exampleName) {
         context: process.cwd() // or the same value as `context`
       }
     }));
+    config.mode = 'production';
   }
 
   rimraf.sync(path.join(examplePath, 'dist', 'webpack-' + webpackMajorVersion));
