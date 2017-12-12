@@ -4,8 +4,6 @@ var fs = require('fs');
 var _ = require('lodash');
 var Promise = require('bluebird');
 var path = require('path');
-var SyncWaterfallHook = require('tapable').SyncWaterfallHook;
-var AsyncSeriesWaterfallHook = require('tapable').AsyncSeriesWaterfallHook;
 var childCompiler = require('./lib/compiler.js');
 var prettyError = require('./lib/errors.js');
 var chunkSorter = require('./lib/chunksorter.js');
@@ -47,6 +45,8 @@ HtmlWebpackPlugin.prototype.apply = function (compiler) {
   // setup hooks for webpack 4
   if (compiler.hooks && compiler.hooks.compilation) {
     compiler.hooks.compilation.tap('HtmlWebpackPluginHooks', function (compilation) {
+      var SyncWaterfallHook = require('tapable').SyncWaterfallHook;
+      var AsyncSeriesWaterfallHook = require('tapable').AsyncSeriesWaterfallHook;
       compilation.hooks.htmlWebpackPluginAlterChunks = new SyncWaterfallHook(['chunks', 'objectWithPluginRef']);
       compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration = new AsyncSeriesWaterfallHook(['pluginArgs']);
       compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing = new AsyncSeriesWaterfallHook(['pluginArgs']);
