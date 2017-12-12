@@ -36,7 +36,10 @@ function runExample (exampleName, done) {
         options.module.rules = options.module.loaders;
         delete options.module.loaders;
       }
+      // TODO should we test both modes?
+      options.mode = 'development';
     }
+
     webpack(options, function (err) {
       var dircompare = require('dir-compare');
       var res = dircompare.compareSync(fixturePath, exampleOutput, {compareSize: true});
