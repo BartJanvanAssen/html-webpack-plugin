@@ -85,11 +85,11 @@ HtmlWebpackPlugin.prototype.apply = function (compiler) {
     // Sort chunks
     chunks = self.sortChunks(chunks, self.options.chunksSortMode);
     // Let plugins alter the chunks and the chunk sorting
-    if (compilation.applyPluginsWaterfall) {
-      chunks = compilation.applyPluginsWaterfall('html-webpack-plugin-alter-chunks', chunks, { plugin: self });
-    } else {
-      // Webpack 4
+    if (compilation.hooks) {
       chunks = compilation.hooks.htmlWebpackPluginAlterChunks.call(chunks, { plugin: self });
+    } else {
+      // Before Webpack 4
+      chunks = compilation.applyPluginsWaterfall('html-webpack-plugin-alter-chunks', chunks, { plugin: self });
     }
     // Get assets
     var assets = self.htmlWebpackPluginAssets(compilation, chunks);
@@ -332,11 +332,11 @@ HtmlWebpackPlugin.prototype.addFileToAssets = function (filename, compilation) {
   })
   .then(function (results) {
     var basename = path.basename(filename);
-    if (compilation.fileDependencies.push) {
-      compilation.fileDependencies.push(filename);
-    } else {
-      // Webpack 4 - fileDepenencies is now a Set
+    if (compilation.fileDependencies.add) {
       compilation.fileDependencies.add(filename);
+    } else {
+      // Before Webpack 4 - fileDepenencies was an array
+      compilation.fileDependencies.push(filename);
     }
     compilation.assets[basename] = {
       source: function () {
@@ -664,8 +664,19 @@ HtmlWebpackPlugin.prototype.getAssetFiles = function (assets) {
  * a function that helps to merge given plugin arguments with processed ones
  */
 HtmlWebpackPlugin.prototype.applyPluginsAsyncWaterfall = function (compilation) {
-  if (compilation.applyPluginsAsyncWaterfall) {
-    // Webpack < 4
+  if (compilation.hooks) {
+    return function (eventName, requiresResult, pluginArgs) {
+      var ccEventName = trainCaseToCamelCase(eventName);
+      if (!compilation.hooks[ccEventName]) {
+        compilation.errors.push(
+          new Error('No hook found for ' + eventName)
+        );
+      }
+
+      return compilation.hooks[ccEventName].promise(pluginArgs);
+    };
+  } else {
+    // Before Webpack 4
     var promisedApplyPluginsAsyncWaterfall = Promise.promisify(
       compilation.applyPluginsAsyncWaterfall,
       { context: compilation }
@@ -680,18 +691,6 @@ HtmlWebpackPlugin.prototype.applyPluginsAsyncWaterfall = function (compilation) 
           }
           return _.extend(pluginArgs, result);
         });
-    };
-  } else {
-    // Webpack 4
-    return function (eventName, requiresResult, pluginArgs) {
-      var ccEventName = trainCaseToCamelCase(eventName);
-      if (!compilation.hooks[ccEventName]) {
-        compilation.errors.push(
-          new Error('No hook found for ' + eventName)
-        );
-      }
-
-      return compilation.hooks[ccEventName].promise(pluginArgs);
     };
   }
 };
