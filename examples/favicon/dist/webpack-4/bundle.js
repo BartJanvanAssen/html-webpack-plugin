@@ -65,31 +65,24 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./example.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ "./example.js":
-/*!********************!*\
-  !*** ./example.js ***!
-  \********************/
-/*! no static exports found */
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! ./main.css */ \"./main.css\");\nvar h1 = document.createElement('h1');\nh1.innerHTML = 'Hello world!';\ndocument.body.appendChild(h1);\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./example.js\n// module id = ./example.js\n// module chunks = main\n\n//# sourceURL=webpack:///./example.js?");
+__webpack_require__(1);
+var h1 = document.createElement('h1');
+h1.innerHTML = 'Hello world!';
+document.body.appendChild(h1);
+
 
 /***/ }),
-
-/***/ "./main.css":
-/*!******************!*\
-  !*** ./main.css ***!
-  \******************/
-/*! no static exports found */
+/* 1 */
 /***/ (function(module, exports) {
 
-eval("// removed by extract-text-webpack-plugin\n\n//////////////////\n// WEBPACK FOOTER\n// ./main.css\n// module id = ./main.css\n// module chunks = main\n\n//# sourceURL=webpack:///./main.css?");
+// removed by extract-text-webpack-plugin
 
 /***/ })
-
-/******/ });
+/******/ ]);

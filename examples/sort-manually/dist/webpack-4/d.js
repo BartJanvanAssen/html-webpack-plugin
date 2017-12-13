@@ -65,20 +65,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./d.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ "./d.js":
-/*!**************!*\
-  !*** ./d.js ***!
-  \**************/
-/*! no static exports found */
+/******/ ([
+/* 0 */,
+/* 1 */
 /***/ (function(module, exports) {
 
-eval("var h1 = document.createElement('h1');\nh1.innerHTML = 'd!';\ndocument.body.appendChild(h1);\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./d.js\n// module id = ./d.js\n// module chunks = d\n\n//# sourceURL=webpack:///./d.js?");
+var h1 = document.createElement('h1');
+h1.innerHTML = 'd!';
+document.body.appendChild(h1);
+
 
 /***/ })
-
-/******/ });
+/******/ ]);

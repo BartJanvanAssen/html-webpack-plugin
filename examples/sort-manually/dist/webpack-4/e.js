@@ -65,19 +65,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./e.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./e.js":
-/*!**************!*\
-  !*** ./e.js ***!
-  \**************/
-/*! no static exports found */
+/***/ 5:
 /***/ (function(module, exports) {
 
-eval("var h1 = document.createElement('h1');\nh1.innerHTML = 'e!';\ndocument.body.appendChild(h1);\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./e.js\n// module id = ./e.js\n// module chunks = e\n\n//# sourceURL=webpack:///./e.js?");
+var h1 = document.createElement('h1');
+h1.innerHTML = 'e!';
+document.body.appendChild(h1);
+
 
 /***/ })
 

@@ -65,19 +65,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./c.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./c.js":
-/*!**************!*\
-  !*** ./c.js ***!
-  \**************/
-/*! no static exports found */
+/***/ 4:
 /***/ (function(module, exports) {
 
-eval("var h1 = document.createElement('h1');\nh1.innerHTML = 'c!';\ndocument.body.appendChild(h1);\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./c.js\n// module id = ./c.js\n// module chunks = c\n\n//# sourceURL=webpack:///./c.js?");
+var h1 = document.createElement('h1');
+h1.innerHTML = 'c!';
+document.body.appendChild(h1);
+
 
 /***/ })
 

@@ -65,20 +65,17 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./b.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ "./b.js":
-/*!**************!*\
-  !*** ./b.js ***!
-  \**************/
-/*! no static exports found */
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
-eval("var h1 = document.createElement('h1');\nh1.innerHTML = 'b!';\ndocument.body.appendChild(h1);\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./b.js\n// module id = ./b.js\n// module chunks = b\n\n//# sourceURL=webpack:///./b.js?");
+var h1 = document.createElement('h1');
+h1.innerHTML = 'b!';
+document.body.appendChild(h1);
+
 
 /***/ })
-
-/******/ });
+/******/ ]);
