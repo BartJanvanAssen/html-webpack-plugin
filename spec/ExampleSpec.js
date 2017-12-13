@@ -43,7 +43,7 @@ function runExample (exampleName, done) {
         delete options.module.loaders;
       }
       // TODO should we test both modes?
-      options.mode = 'development';
+      options.mode = 'production';
     }
 
     webpack(options, function (err) {

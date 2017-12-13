@@ -38,7 +38,7 @@ examples.forEach(function (exampleName) {
         context: process.cwd() // or the same value as `context`
       }
     }));
-    config.mode = 'development';
+    config.mode = 'production';
     if (config.module && config.module.loaders) {
       config.module.rules = config.module.loaders;
       delete config.module.loaders;
