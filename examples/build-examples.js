@@ -9,6 +9,7 @@ var webpackMajorVersion = require('webpack/package.json').version.split('.')[0];
 var fs = require('fs');
 var path = require('path');
 var rimraf = require('rimraf');
+var replaceInFile = require('replace-in-file');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -44,7 +45,8 @@ examples.forEach(function (exampleName) {
     }
   }
 
-  rimraf.sync(path.join(examplePath, 'dist', 'webpack-' + webpackMajorVersion));
+  var outputDir = path.join(examplePath, 'dist', 'webpack-' + webpackMajorVersion);
+  rimraf.sync(outputDir);
   webpack(config, function (err, stats) {
     if (err) {
       console.error(err.stack || err);
@@ -62,6 +64,17 @@ examples.forEach(function (exampleName) {
 
     if (stats.hasWarnings()) {
       console.warn(info.warnings);
+    }
+
+    // Some generated webpack comments include absolute paths which will always
+    // be different on different machines. We want to strip out those paths so
+    // that tests can run anywhere
+    if (Number(webpackMajorVersion) >= 4) {
+      replaceInFile.sync({
+        files: path.join(outputDir, '**'),
+        from: RegExp(path.resolve(__dirname, '..') + '/', 'g'),
+        to: '/__REPO_PATH__/'
+      });
     }
   });
 });

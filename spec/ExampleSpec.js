@@ -15,6 +15,7 @@ if (!global.Promise) {
 var path = require('path');
 var webpack = require('webpack');
 var rimraf = require('rimraf');
+var replaceInFile = require('replace-in-file');
 var fs = require('fs');
 var webpackMajorVersion = require('webpack/package.json').version.split('.')[0];
 
@@ -46,6 +47,17 @@ function runExample (exampleName, done) {
     }
 
     webpack(options, function (err) {
+      // Some generated webpack comments include absolute paths which will always
+      // be different on different machines. We want to strip out those paths so
+      // that tests can run anywhere
+      if (Number(webpackMajorVersion) >= 4) {
+        replaceInFile.sync({
+          files: path.join(exampleOutput, '**'),
+          from: RegExp(path.resolve(__dirname, '..') + '/', 'g'),
+          to: '/__REPO_PATH__/'
+        });
+      }
+
       var dircompare = require('dir-compare');
       var res = dircompare.compareSync(fixturePath, exampleOutput, {compareSize: true});
 
